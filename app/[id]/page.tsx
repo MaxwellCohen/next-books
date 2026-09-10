@@ -1,5 +1,4 @@
 import { AnimatedSuspense } from '@/components/ui/animated-suspense';
-import ErrorBoundary from '@/components/ui/error-boundary';
 import { getBookById } from '@/features/book/book-queries';
 import { BackToBooksLink } from '@/features/book/components/back-to-books-link';
 import { BookDetail, BookDetailSkeleton } from '@/features/book/components/book-detail';
@@ -15,15 +14,13 @@ export default function Page({ params }: PageProps<'/[id]'>) {
   return (
     <div className="flex flex-1 flex-col px-4 py-5 sm:px-6">
       <BackToBooksLink className="mb-6" />
-      <ErrorBoundary body="We couldn't load this book's details." title="Can't load book">
-        <div>
-          <AnimatedSuspense fallback={<BookDetailSkeleton />}>
-            {params.then(({ id }) => (
-              <BookDetail id={id} />
-            ))}
-          </AnimatedSuspense>
-        </div>
-      </ErrorBoundary>
+      <div>
+        <AnimatedSuspense fallback={<BookDetailSkeleton />}>
+          {params.then(({ id }) => (
+            <BookDetail id={id} />
+          ))}
+        </AnimatedSuspense>
+      </div>
     </div>
   );
 }
