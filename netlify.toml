@@ -4,3 +4,9 @@
 
 [build.environment]
   NODE_VERSION = "24"
+  PNPM_FLAGS = "--shamefully-hoist"
+
+# Explicitly enable the Next.js runtime. Auto-detection skipped the plugin
+# on the first deploy (plugin_state=none), which published .next as static files.
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
