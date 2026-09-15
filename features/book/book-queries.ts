@@ -47,7 +47,12 @@ const imageFilter = () => and(not(isNull(books.image_url)), sql`${books.image_ur
 
 const searchFilter = (search: string) =>
   search
-    ? sql`to_tsvector('english', ${books.title_tsv}) @@ plainto_tsquery('english', unaccent(${search}))`
+    // Parse and quote lexemes before adding prefix operators, so punctuation
+    // stays search text rather than becoming user-supplied tsquery syntax.
+    ? sql`to_tsvector('english', ${books.title_tsv}) @@ (
+        SELECT string_agg(quote_literal(term) || ':*', ' & ')::tsquery
+        FROM unnest(tsvector_to_array(to_tsvector('english', unaccent(${search})))) AS terms(term)
+      )`
     : undefined;
 
 const isbnFilter = (isbns: string) => {

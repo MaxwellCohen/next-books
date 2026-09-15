@@ -4,7 +4,8 @@ import { getBooksPage } from '@/features/book/book-queries';
 import { toBookQuery } from '@/features/book/book-utils';
 import { BookGrid, BookGridSkeleton } from '@/features/book/components/book-grid';
 import { BookPagination, BookPaginationSkeleton } from '@/features/book/components/book-pagination';
-import { parseSearchParams } from '@/lib/url-state';
+import { waitForApiDelay } from '@/lib/api-delay';
+import { getApiDelayMs, parseSearchParams } from '@/lib/url-state';
 import type { SearchParams } from '@/lib/url-state';
 
 export default function Page({ searchParams }: PageProps<'/'>) {
@@ -29,6 +30,7 @@ export default function Page({ searchParams }: PageProps<'/'>) {
 }
 
 async function BookResults({ searchParams }: { searchParams: SearchParams }) {
+  await waitForApiDelay(getApiDelayMs(searchParams));
   const books = await getBooksPage(toBookQuery(searchParams));
 
   return <BookGrid books={books} searchParams={searchParams} />;

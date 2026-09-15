@@ -25,7 +25,7 @@ import type { SearchParams } from '@/lib/url-state';
 type FilterAction = { patch: Partial<SearchParams>; type: 'change' } | { type: 'reset' };
 
 function filterReducer(filters: SearchParams, action: FilterAction): SearchParams {
-  return action.type === 'reset' ? {} : withFilters(filters, action.patch);
+  return action.type === 'reset' ? (filters.delay ? { delay: filters.delay } : {}) : withFilters(filters, action.patch);
 }
 
 function BookFiltersForm({ idPrefix, initialParams }: { idPrefix: string; initialParams: SearchParams }) {
@@ -33,7 +33,9 @@ function BookFiltersForm({ idPrefix, initialParams }: { idPrefix: string; initia
   const [isPending, startTransition] = useTransition();
   const [filters, dispatch] = useOptimistic(initialParams, filterReducer);
 
-  const activeCount = Object.entries(filters).filter(([key, value]) => key !== 'page' && Boolean(value)).length;
+  const activeCount = Object.entries(filters).filter(
+    ([key, value]) => key !== 'page' && key !== 'delay' && Boolean(value),
+  ).length;
 
   function commit(patch: Partial<SearchParams>) {
     const next = withFilters(filters, patch);
@@ -143,7 +145,7 @@ function BookFiltersForm({ idPrefix, initialParams }: { idPrefix: string; initia
             onClick={() =>
               startTransition(() => {
                 dispatch({ type: 'reset' });
-                router.replace('/', { scroll: false });
+                router.replace(buildHref({ delay: filters.delay }), { scroll: false });
               })
             }
             variant="secondary"

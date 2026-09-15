@@ -1,5 +1,9 @@
+'use client';
+
+import { useEffect } from 'react';
 import { EmptyState } from '@/components/ui/empty-state';
-import { ITEMS_PER_PAGE } from '@/features/book/book-constants';
+import { ITEMS_PER_PAGE, PRIORITY_COVER_COUNT } from '@/features/book/book-constants';
+import { enableCoverGating, preloadBookCovers } from '@/features/book/book-images';
 import type { BookSummary } from '@/features/book/book-queries';
 import { BookCard, BookCardSkeleton } from '@/features/book/components/book-card';
 import { getCurrentPage, type SearchParams } from '@/lib/url-state';
@@ -7,6 +11,11 @@ import { getCurrentPage, type SearchParams } from '@/lib/url-state';
 const gridClass = 'grid grid-cols-3 gap-4 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-7';
 
 export function BookGrid({ books, searchParams }: { books: BookSummary[]; searchParams: SearchParams }) {
+  useEffect(() => {
+    enableCoverGating();
+    preloadBookCovers(books);
+  }, [books]);
+
   if (books.length === 0) {
     return (
       <EmptyState
@@ -25,7 +34,7 @@ export function BookGrid({ books, searchParams }: { books: BookSummary[]; search
           book={book}
           eagerPrefetch={eagerPrefetch}
           key={book.id}
-          priority={index < 10}
+          priority={index < PRIORITY_COVER_COUNT}
           searchParams={searchParams}
         />
       ))}

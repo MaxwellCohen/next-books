@@ -6,6 +6,7 @@ export function getLargeBookImageUrl(url: string): string {
 }
 
 export const ITEMS_PER_PAGE = 28;
+export const PRIORITY_COVER_COUNT = 10;
 
 export const MIN_YEAR = 1950;
 export const MAX_YEAR = 2023;

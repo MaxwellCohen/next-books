@@ -11,7 +11,7 @@ async function nudgeSlider(page: Page, nth: number, expected: RegExp) {
 
 test('changing a filter resets pagination and clear restores the defaults', async ({ page }) => {
   await page.goto('/?page=2');
-  await nudgeSlider(page, 1, /rating=0.5/);
+  await nudgeSlider(page, 2, /rating=0.5/);
   await expect(page).not.toHaveURL(/page=/);
 
   const clear = page.getByRole('button', { name: 'Clear all filters' });
@@ -26,7 +26,7 @@ test('the clear button only appears once a filter is active', async ({ page }) =
   await page.goto('/');
   await expect(page.getByRole('button', { name: 'Clear all filters' })).toHaveCount(0);
 
-  await nudgeSlider(page, 1, /rating=0.5/);
+  await nudgeSlider(page, 2, /rating=0.5/);
   await expect(page.getByRole('button', { name: 'Clear all filters' })).toBeVisible();
 });
 

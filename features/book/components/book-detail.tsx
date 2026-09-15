@@ -1,6 +1,7 @@
 import { BookOpen, Building2, CalendarDays, Globe, Hash } from 'lucide-react';
 import { Skeleton } from '@/components/ui/skeleton';
 import { StarRating } from '@/components/ui/star-rating';
+import { waitForApiDelay } from '@/lib/api-delay';
 import { getBookById } from '@/features/book/book-queries';
 import { formatCount, getLanguageLabel } from '@/features/book/book-utils';
 import { BookCover, BookCoverSkeleton } from '@/features/book/components/book-cover';
@@ -8,7 +9,8 @@ import type { ReactNode } from 'react';
 
 const DETAIL_SIZES = '(min-width: 768px) 18rem, 60vw';
 
-export async function BookDetail({ id }: { id: string }) {
+export async function BookDetail({ delayMs = 0, id }: { delayMs?: number; id: string }) {
+  await waitForApiDelay(delayMs);
   const book = await getBookById(id);
 
   const rating = Number(book.average_rating);

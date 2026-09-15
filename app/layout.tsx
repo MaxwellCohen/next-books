@@ -2,18 +2,18 @@ import { Analytics } from '@vercel/analytics/next';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import { Geist, Geist_Mono } from 'next/font/google';
 import { Suspense } from 'react';
-import { BookMark } from '@/components/book-mark';
 import { MobileBookSidebar, MobileBookSidebarTrigger } from '@/components/mobile-book-sidebar';
 import { OfflineIndicator } from '@/components/offline-indicator';
 import { ThemeProvider } from '@/components/theme/theme-provider';
 import { ThemeToggle } from '@/components/theme/theme-toggle';
 import { Toaster } from '@/components/toaster';
 import ErrorBoundary from '@/components/ui/error-boundary';
-import { FastLink } from '@/components/ui/fast-link';
 import { GitHubIcon } from '@/components/ui/github-icon';
+import { ApiDelay, ApiDelayFallback } from '@/features/book/components/api-delay';
 import { BookFilters, BookFiltersFallback } from '@/features/book/components/book-filters';
 import { BookSearch } from '@/features/book/components/book-search';
 import { CatalogSize } from '@/features/book/components/catalog-size';
+import { HomeLink, HomeLinkFallback } from '@/features/book/components/home-link';
 import type { Metadata, Viewport } from 'next';
 import type { ReactNode } from 'react';
 import './globals.css';
@@ -57,11 +57,11 @@ export const metadata: Metadata = {
   metadataBase: metadataBaseUrl(),
   openGraph: {
     description,
-    siteName: 'NextBooks',
-    title: 'NextBooks',
+    siteName: 'Next Books',
+    title: 'Next Books',
     type: 'website',
   },
-  title: { default: 'NextBooks', template: '%s · NextBooks' },
+  title: { default: 'Next Books', template: '%s · Next Books' },
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
@@ -105,20 +105,19 @@ function BookSidebarContent({ idPrefix, mobile = false }: { idPrefix: string; mo
   return (
     <>
       <div className="flex items-center justify-between gap-2">
-        <FastLink
-          aria-label="NextBooks home"
-          className="inline-flex items-center gap-2 text-base font-semibold tracking-tight"
-          href="/"
-          prefetch={true}
-        >
-          <BookMark className="text-action size-5" />
-          NextBooks
-        </FastLink>
+        <Suspense fallback={<HomeLinkFallback />}>
+          <HomeLink />
+        </Suspense>
       </div>
       <div className="border-divider dark:border-divider-dark mt-6 border-b pb-5">
         <CatalogSize />
       </div>
-      <p className="text-muted mt-5 mb-4 text-xs font-semibold tracking-wide uppercase">Filters</p>
+      <div className="mt-5 mb-4">
+        <Suspense fallback={<ApiDelayFallback idPrefix={idPrefix} />}>
+          <ApiDelay idPrefix={idPrefix} />
+        </Suspense>
+      </div>
+      <p className="text-muted mb-4 text-xs font-semibold tracking-wide uppercase">Filters</p>
       <ErrorBoundary compact title="Filters unavailable">
         <Suspense fallback={<BookFiltersFallback idPrefix={idPrefix} />}>
           <BookFilters idPrefix={idPrefix} />
