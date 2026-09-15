@@ -41,14 +41,20 @@ export const viewport: Viewport = {
   viewportFit: 'cover',
 };
 
+function metadataBaseUrl() {
+  const explicit = process.env.NEXT_PUBLIC_BASE_URL?.trim();
+  const vercelHost = process.env.VERCEL_PROJECT_PRODUCTION_URL?.trim();
+  const raw = explicit || (vercelHost ? `https://${vercelHost}` : 'http://localhost:3000');
+  try {
+    return new URL(raw);
+  } catch {
+    return new URL('http://localhost:3000');
+  }
+}
+
 export const metadata: Metadata = {
   description,
-  metadataBase: new URL(
-    process.env.NEXT_PUBLIC_BASE_URL ??
-      (process.env.VERCEL_PROJECT_PRODUCTION_URL
-        ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
-        : 'http://localhost:3000'),
-  ),
+  metadataBase: metadataBaseUrl(),
   openGraph: {
     description,
     siteName: 'NextBooks',
