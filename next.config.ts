@@ -15,7 +15,7 @@ const nextConfig: NextConfig = {
       },
     ],
   },
-  partialPrefetching: true,
+  partialPrefetching: false,
   reactCompiler: true,
   typedRoutes: true,
 };
