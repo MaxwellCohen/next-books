@@ -10,7 +10,7 @@ const nextConfig: NextConfig = {
   },
   images: {
     // Cloudflare Images is optional; skip the optimizer on Workers builds.
-    unoptimized: Boolean(process.env.CLOUDFLARE || process.env.WORKERS_CI),
+    unoptimized: isCloudflare,
     remotePatterns: [
       {
         hostname: '*.gr-assets.com',

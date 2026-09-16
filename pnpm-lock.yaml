@@ -17,9 +17,6 @@ importers:
       '@neondatabase/serverless':
         specifier: ^1.1.0
         version: 1.1.0
-      '@opennextjs/cloudflare':
-        specifier: https://pkg.pr.new/@opennextjs/cloudflare@69807b
-        version: https://pkg.pr.new/@opennextjs/cloudflare@69807b(patch_hash=e4679618195e96c4dfba3fcefc01b2938b2a64d31b32083702b17feb7db6c401)(next@16.4.0-canary.8(@babel/core@7.29.7(supports-color@10.2.2))(@opentelemetry/api@1.9.0)(@playwright/test@1.62.1)(@types/node@26.3.0)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(supports-color@10.2.2)(wrangler@4.131.2(@types/node@26.3.0)(bufferutil@4.1.0)(utf-8-validate@6.0.6))
       '@vercel/analytics':
         specifier: ^2.0.1
         version: 2.0.1(next@16.4.0-canary.8(@babel/core@7.29.7(supports-color@10.2.2))(@opentelemetry/api@1.9.0)(@playwright/test@1.62.1)(@types/node@26.3.0)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react@19.2.8)
@@ -72,6 +69,9 @@ importers:
       '@next/playwright':
         specifier: 16.4.0-canary.8
         version: 16.4.0-canary.8(@playwright/test@1.62.1)
+      '@opennextjs/cloudflare':
+        specifier: https://pkg.pr.new/@opennextjs/cloudflare@69807b
+        version: https://pkg.pr.new/@opennextjs/cloudflare@69807b(patch_hash=e4679618195e96c4dfba3fcefc01b2938b2a64d31b32083702b17feb7db6c401)(next@16.4.0-canary.8(@babel/core@7.29.7(supports-color@10.2.2))(@opentelemetry/api@1.9.0)(@playwright/test@1.62.1)(@types/node@26.3.0)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(supports-color@10.2.2)(wrangler@4.131.2(@types/node@26.3.0)(bufferutil@4.1.0)(utf-8-validate@6.0.6))
       '@playwright/test':
         specifier: ^1.62.1
         version: 1.62.1
@@ -129,9 +129,6 @@ importers:
       typescript:
         specifier: ^6.0.2
         version: 6.0.3
-      wrangler:
-        specifier: ^4.131.2
-        version: 4.131.2(@types/node@26.3.0)(bufferutil@4.1.0)(utf-8-validate@6.0.6)
 
 packages:
 

@@ -19,13 +19,12 @@
     "db:seed-authors": "tsx lib/db/seed-authors.ts",
     "db:seed-books": "tsx lib/db/seed-books.ts",
     "db:seed-thumbhash": "tsx lib/db/seed-thumbhash.ts",
-    "preview:cloudflare": "CLOUDFLARE=1 opennextjs-cloudflare build && opennextjs-cloudflare preview",
-    "deploy:cloudflare": "CLOUDFLARE=1 opennextjs-cloudflare build && opennextjs-cloudflare deploy"
+    "preview:cloudflare": "CLOUDFLARE=1 opennextjs-cloudflare build && npx --yes wrangler@4.131.2 dev",
+    "deploy:cloudflare": "CLOUDFLARE=1 opennextjs-cloudflare build && npx --yes wrangler@4.131.2 deploy"
   },
   "dependencies": {
     "@ariakit/react": "^0.4.38",
     "@neondatabase/serverless": "^1.1.0",
-    "@opennextjs/cloudflare": "https://pkg.pr.new/@opennextjs/cloudflare@69807b",
     "@vercel/analytics": "^2.0.1",
     "@vercel/speed-insights": "^2.0.0",
     "clsx": "^2.1.1",
@@ -51,6 +50,7 @@
     "@types/react": "^19.2.18",
     "@types/react-dom": "^19.2.5",
     "@typescript/native": "npm:typescript@^7.0.2",
+    "@opennextjs/cloudflare": "https://pkg.pr.new/@opennextjs/cloudflare@69807b",
     "babel-plugin-react-compiler": "^1.0.0",
     "drizzle-kit": "^0.31.10",
     "eslint": "^9.39.5",
@@ -63,8 +63,7 @@
     "sharp": "^0.35.3",
     "tailwindcss": "^4",
     "tsx": "^4.23.12",
-    "typescript": "^6.0.2",
-    "wrangler": "^4.131.2"
+    "typescript": "^6.0.2"
   },
   "packageManager": "pnpm@11.24.0"
 }
