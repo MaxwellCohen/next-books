@@ -1,7 +1,6 @@
 import 'server-only';
 
 import { and, count, eq, gte, isNull, lte, not, sql } from 'drizzle-orm';
-import { cacheLife } from 'next/cache';
 import { notFound } from 'next/navigation';
 import { EMPTY_IMAGE_URL, ITEMS_PER_PAGE, MIN_RATING, MIN_YEAR } from '@/features/book/book-constants';
 import { GENERATED_PREVIEW_BOOKS } from '@/features/book/book-preview-catalog';
@@ -113,9 +112,6 @@ function getPreviewCount(filters: BookFilters): number {
 }
 
 export async function getBooksPage(query: BookQuery): Promise<BookSummary[]> {
-  'use cache';
-  cacheLife('hours');
-
   const database = db;
   if (!database) return getPreviewBooks(query);
 
@@ -134,9 +130,6 @@ export async function getBooksPage(query: BookQuery): Promise<BookSummary[]> {
 }
 
 export async function getBooksCount(filters: BookFilters): Promise<number> {
-  'use cache';
-  cacheLife('hours');
-
   const database = db;
   if (!database) return getPreviewCount(filters);
 
@@ -145,9 +138,6 @@ export async function getBooksCount(filters: BookFilters): Promise<number> {
 }
 
 export async function getBookById(id: string): Promise<BookDetails> {
-  'use cache';
-  cacheLife('hours');
-
   const bookId = Number(id);
   if (!Number.isInteger(bookId)) notFound();
 
