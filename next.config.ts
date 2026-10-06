@@ -1,16 +1,14 @@
 import type { NextConfig } from 'next';
 
-const isCloudflare = Boolean(process.env.CLOUDFLARE || process.env.WORKERS_CI);
-
 const nextConfig: NextConfig = {
   cacheComponents: true,
   experimental: {
     inlineCss: true,
-    useOffline: !isCloudflare,
+    useOffline: true,
   },
   images: {
-    // Cloudflare Images is optional; skip the optimizer on Workers builds.
-    unoptimized: isCloudflare,
+    // Workers resize through the IMAGES binding in wrangler.jsonc.
+    // Vercel and Netlify use the built-in optimizer.
     remotePatterns: [
       {
         hostname: '*.gr-assets.com',
@@ -19,7 +17,7 @@ const nextConfig: NextConfig = {
       },
     ],
   },
-  partialPrefetching: !isCloudflare,
+  partialPrefetching: true,
   reactCompiler: true,
   typedRoutes: true,
 };

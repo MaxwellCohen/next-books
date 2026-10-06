@@ -14,6 +14,9 @@
       "service": "next-books"
     }
   ],
+  "images": {
+    "binding": "IMAGES"
+  },
   "observability": {
     "enabled": true
   }
