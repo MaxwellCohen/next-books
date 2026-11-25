@@ -33,9 +33,12 @@ yarn-error.log*
 # ...but the documented template is meant to be committed
 !.env.sample
 
-# vercel / netlify
+# vercel / netlify / cloudflare
 .vercel
 .netlify
+.wrangler
+.open-next
+.dev.vars
 
 # Database import checkpoints
 *_import_checkpoint.json

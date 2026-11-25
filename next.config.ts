@@ -7,6 +7,8 @@ const nextConfig: NextConfig = {
     useOffline: true,
   },
   images: {
+    // Workers resize through the IMAGES binding in wrangler.jsonc.
+    // Vercel and Netlify use the built-in optimizer.
     remotePatterns: [
       {
         hostname: '*.gr-assets.com',

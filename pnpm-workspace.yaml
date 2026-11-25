@@ -4,3 +4,6 @@ allowBuilds:
   sharp: true
   unrs-resolver: false
   utf-8-validate: false
+  workerd: true
+patchedDependencies:
+  '@opennextjs/cloudflare@1.20.2': patches/@opennextjs__cloudflare@1.20.2.patch
