@@ -3,8 +3,8 @@ import type { NextConfig } from 'next';
 const nextConfig: NextConfig = {
   cacheComponents: false,
   experimental: {
-    inlineCss: true,
-    useOffline: true,
+    inlineCss: false,
+    useOffline: false,
   },
   images: {
     // Workers resize through the IMAGES binding in wrangler.jsonc.
@@ -18,7 +18,7 @@ const nextConfig: NextConfig = {
     ],
   },
   partialPrefetching: false,
-  reactCompiler: true,
+  reactCompiler: false,
   typedRoutes: true,
 };
 
