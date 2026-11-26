@@ -6,7 +6,7 @@ import { expect, test } from '@playwright/test';
 import { evidence, record } from './helpers';
 
 const ROOT = path.join(__dirname, '..');
-const PORT = 4102;
+const PORT = Number(process.env.FT_PORT ?? 4101) + 1;
 const env = { ...process.env, POSTGRES_URL: '' };
 
 test('multi-host-deployment: builds for Node (standalone) and Cloudflare (OpenNext)', async ({ request }) => {
