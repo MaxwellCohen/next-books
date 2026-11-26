@@ -18,6 +18,10 @@ import type { Metadata, Viewport } from 'next';
 import type { ReactNode } from 'react';
 import './globals.css';
 
+// Every route's App Shell (sidebar, header, Suspense fallbacks) must stay static;
+// request-specific content streams in behind Suspense at prefetch/navigation time.
+export const ensureStatic = 'shell';
+
 const geistSans = Geist({
   display: 'block',
   subsets: ['latin'],

@@ -1,3 +1,28 @@
+diff --git a/dist/cli/build/patches/plugins/cache-components.js b/dist/cli/build/patches/plugins/cache-components.js
+index e5d7e337c2bffbfce28ff32252c344ec2ef92c4b..bfefa8d8ec454d6f133d1228ffd9a01cd0f1f2d3 100644
+--- a/dist/cli/build/patches/plugins/cache-components.js
++++ b/dist/cli/build/patches/plugins/cache-components.js
+@@ -183,17 +183,17 @@ export const requestScopedModuleLoadingSignalRule = `
+ rule:
+   pattern:
+     selector: function_declaration
+-    context: "function $FUNCTION() { if (!$SIGNAL) { $SIGNAL = new $CTOR(); } return $SIGNAL; }"
++    context: "function $FUNCTION() { if (!$SIGNAL) { $SIGNAL = new $CTOR($$$CTOR_ARGS); } return $SIGNAL; }"
+ fix: |-
+   function $FUNCTION() {
+     const cloudflareRequestScope = globalThis[Symbol.for("__cloudflare-context__")];
+     if (!cloudflareRequestScope) {
+       if (!$SIGNAL) {
+-        $SIGNAL = new $CTOR();
++        $SIGNAL = new $CTOR($$$CTOR_ARGS);
+       }
+       return $SIGNAL;
+     }
+-    return (cloudflareRequestScope.__openNextModuleLoadingSignal ??= new $CTOR());
++    return (cloudflareRequestScope.__openNextModuleLoadingSignal ??= new $CTOR($$$CTOR_ARGS));
+   }
+ `;
+ /**
 diff --git a/dist/cli/build/patches/plugins/load-manifest.js b/dist/cli/build/patches/plugins/load-manifest.js
 index b0616a9a1a2729c3bc1cf03dd88edde8afa09d08..78de2b802e6aa702d4fdf40da219489ac7abe1d8 100644
 --- a/dist/cli/build/patches/plugins/load-manifest.js
