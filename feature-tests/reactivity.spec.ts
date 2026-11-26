@@ -9,6 +9,8 @@ test('reactivity: signal updates the text node without re-running the component'
   await page.goto('/feature-tests/reactivity');
   await page.waitForLoadState('networkidle');
   const renders = () => page.evaluate(() => ({ ...(window.__ftRenders ?? {}) }));
+  // Wait for hydration: the client render counters only exist once React has rendered in the browser.
+  await expect.poll(async () => (await renders()).signal, { timeout: 15_000 }).toBe(1);
   const initial = await renders();
   expect(initial.signal).toBe(1);
 
