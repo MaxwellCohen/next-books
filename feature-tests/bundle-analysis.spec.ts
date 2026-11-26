@@ -14,11 +14,11 @@ function walk(dir: string): string[] {
   });
 }
 
-test('bundle-analysis: `next experimental-analyze --output` writes a report', async () => {
-  record({ claimedLabel: 'first-party', method: 'built-in Turbopack analyzer: `next experimental-analyze --output` (16.4.0-canary.8 name)' });
+test('bundle-analysis: `next analyze --output` writes a report', async () => {
+  record({ claimedLabel: 'first-party', method: 'built-in Turbopack analyzer: `next analyze --output` (stable name since 16.4.6)' });
   rmSync(OUT, { force: true, recursive: true });
   const t0 = Date.now();
-  execSync('npx next experimental-analyze --output', { cwd: ROOT, env: { ...process.env, POSTGRES_URL: '' }, stdio: 'inherit' });
+  execSync('npx next analyze --output', { cwd: ROOT, env: { ...process.env, POSTGRES_URL: '' }, stdio: 'inherit' });
   expect(existsSync(OUT)).toBe(true);
   const files = walk(OUT);
   const reports = files.filter(f => /\.(html|json|data)$/.test(f) || /analyze/.test(f));

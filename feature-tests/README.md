@@ -22,7 +22,7 @@ catalog (`POSTGRES_URL=''`). Pages live under `app/feature-tests/<featureId>`.
 | render-modes | 1st-party | Page-level `'use cache'` route is in `.next/server/app/...html` with a stable stamp equal to the build; `connection()` route's stamp changes per request. |
 | reactivity | 3rd-party | `@preact/signals-react`: signal text updates 0→3 while the component's render count stays 1; `useState` baseline re-renders each click. |
 | third-party-scripts | 1st-party | `next/script` `lazyOnload` / `afterInteractive`: no parser-blocking script in `<head>`, globals get set after FCP. Also probes `strategy="worker"` (pages/-only) in `app/` and records what happens. |
-| bundle-analysis | 1st-party | `next experimental-analyze --output` writes `.next/diagnostics/analyze`. |
+| bundle-analysis | 1st-party | `next analyze --output` writes `.next/diagnostics/analyze`. |
 | multi-host-deployment | 3rd-party | `output: 'standalone'` (`FT_STANDALONE=1`, into `.next-standalone`) builds and serves on :4102; `@opennextjs/cloudflare build` emits `.open-next/worker.js` + assets. |
 
 Specs record `claimedLabel` / `method` / `evidence` as Playwright annotations; `run.mjs` folds the JSON
