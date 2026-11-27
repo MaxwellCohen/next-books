@@ -16,7 +16,7 @@ Rebuild of [vercel-labs/book-inventory](https://github.com/vercel-labs/book-inve
 
 ## Instant Navigations
 
-See [Ensuring instant navigations](https://nextjs.org/docs/app/guides/instant-navigation).
+This `main` branch is the baseline build: Cache Components, Partial Prefetching, `inlineCss` and the React Compiler are off. The tuned build is on the [`optimized`](https://github.com/MaxwellCohen/next-books/tree/optimized) branch. See [Ensuring instant navigations](https://nextjs.org/docs/app/guides/instant-navigation).
 
 - **[Cache Components](https://nextjs.org/docs/app/api-reference/config/next-config-js/cacheComponents)** cache each query with `'use cache'` and `cacheLife`. See [Migrating to Cache Components](https://nextjs.org/docs/app/guides/migrating-to-cache-components).
 - **[Partial Prefetching](https://nextjs.org/docs/app/guides/adopting-partial-prefetching)** prefetches the shared App Shell of links entering the viewport.
