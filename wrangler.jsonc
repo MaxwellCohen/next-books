@@ -2,6 +2,12 @@
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "next-books-optimized",
   "main": ".open-next/worker.js",
+  // Workers Builds runs a bare `wrangler versions upload` on a clean checkout for
+  // non-production branches, so wrangler has to run the OpenNext build itself.
+  // `deploy:cloudflare` builds first, so skip the second build when output exists.
+  "build": {
+    "command": "[ -f .open-next/worker.js ] || CLOUDFLARE=1 pnpm exec opennextjs-cloudflare build"
+  },
   "compatibility_date": "2026-09-15",
   "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
   "assets": {
